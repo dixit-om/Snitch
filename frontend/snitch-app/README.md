@@ -1,59 +1,79 @@
-# SnitchApp
+# Snitch Clothing Brand - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+This is the Angular frontend for the Snitch clothing brand website clone.
 
-## Development server
+## Project Structure
 
-To start a local development server, run:
-
-```bash
-ng serve
+```
+src/
+├── app/
+│   ├── components/     # Reusable components (Header, Footer, etc.)
+│   ├── pages/          # Page components (Home, Products, etc.)
+│   ├── services/       # Angular services
+│   └── models/         # TypeScript interfaces and models
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Development Setup
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+1. Install dependencies:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+2. Run development server:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+3. Open browser to `http://localhost:4200`
 
-To build the project run:
+## Technologies Used
 
-```bash
-ng build
-```
+- **Angular 18+** - Frontend framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **TypeScript** - Programming language
+- **SCSS** - CSS preprocessor
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Project Standards
 
-## Running unit tests
+### Component Organization
+- **Reusable components** → `src/app/components/`
+- **Page components** → `src/app/pages/`
+- All components use standalone architecture
+- TypeScript strict mode enabled
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Styling Guidelines
+- Use Tailwind utility classes for styling
+- Custom styles in component SCSS files when needed
+- Responsive design: mobile-first approach
+- Follow the original Snitch brand design patterns
 
-```bash
-ng test
-```
+### Code Quality
+- Use meaningful variable and function names
+- Keep components focused and single-purpose
+- Use TypeScript types for all data structures
+- Follow Angular style guide
 
-## Running end-to-end tests
+## Available Scripts
 
-For end-to-end (e2e) testing, run:
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run unit tests
+- `npm run lint` - Lint the code
 
-```bash
-ng e2e
-```
+## Features Implemented
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+✅ Professional header component with:
+- Hamburger menu (mobile navigation)
+- Brand logo centered
+- Search functionality
+- Profile and shopping bag icons
+- Responsive design
 
-## Additional Resources
+## Coming Soon
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Product listing components
+- Product detail pages
+- Shopping cart functionality
+- User authentication
+- Checkout process
