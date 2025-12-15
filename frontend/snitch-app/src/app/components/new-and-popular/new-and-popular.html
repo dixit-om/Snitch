@@ -1,0 +1,123 @@
+<div class="max-w-[480px] md:max-w-full">
+  <div class="new-popular-container bg-white pt-2 pb-[24px] flex flex-col justify-center relative">
+    <h2 
+      class="text-center uppercase lg:pl-[0px] mx-auto lg:w-fit" 
+      style="font-family: NewHeroTRIAL-Bold; font-size: 16px;"
+    >
+      New And Popular
+    </h2>
+    
+    <!-- Sticky Chips Filter -->
+    <div 
+      class="chips-sticky-wrapper" 
+      id="new-popular-chips-sticky-wrapper" 
+      style="top: 0px; position: sticky;"
+    >
+      <div class="flex max-w-[480px] md:max-w-full overflow-auto no-scrollbar ml-[16px] my-[16px] md:mx-auto md:justify-center md:flex-wrap md:gap-y-2">
+        @for (chip of filterChips; track chip.id) {
+          <div 
+            class="border border-black cursor-pointer mr-[10px]"
+            [class.bg-black]="selectedFilter === chip.id"
+            [class.bg-white]="selectedFilter !== chip.id"
+            (click)="onFilterClick(chip)"
+          >
+            <p 
+              class="text-center align-middle px-[12px] py-[3px] cursor-pointer m-auto truncate uppercase"
+              [class.text-white]="selectedFilter === chip.id"
+              [class.text-black]="selectedFilter !== chip.id"
+              style="font-family: NewHeroTRIAL-Light; font-size: 12px;"
+            >
+              {{ chip.label }}
+            </p>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <!-- Products Grid -->
+    <div>
+      <div class="grid grid-cols-5 h-full gap-x-2 w-full">
+        @for (product of products; track product.id) {
+          <div class="relative">
+            <a [href]="product.href">
+              <div 
+                class="relative w-full overflow-hidden" 
+                style="height: 390px; pointer-events: auto; cursor: pointer;"
+              >
+                <div class="h-full w-full relative">
+                  <img 
+                    [alt]="product.name" 
+                    loading="lazy" 
+                    decoding="async" 
+                    data-nimg="fill" 
+                    [src]="product.imageUrl" 
+                    style="position: absolute; height: 100%; width: 100%; inset: 0px; object-fit: cover; color: transparent;"
+                  />
+                </div>
+              </div>
+            </a>
+            
+            <!-- Wishlist Button -->
+            <span 
+              class="absolute top-0 right-0 p-2 cursor-pointer hover:bg-[rgba(0,0,0,0.05)]"
+              (click)="onWishlistClick(product, $event)"
+            >
+              <svg width="24" height="24" fill="none">
+                <path 
+                  stroke="#fff" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  d="M11.553 6.974s0 0 0 0h0l-.002-.003-.01-.02a5.342 5.342 0 0 0-.239-.392 6.283 6.283 0 0 0-.785-.954c-.7-.695-1.716-1.355-3.06-1.355-2.18 0-3.934 1.83-3.957 4.043-.049 4.833 3.833 8.342 8.359 11.413h0a.25.25 0 0 0 .282 0h0c4.525-3.071 8.407-6.58 8.359-11.413-.023-2.214-1.776-4.043-3.957-4.043-1.344 0-2.36.66-3.06 1.355a6.283 6.283 0 0 0-.979 1.264l-.045.083-.01.019-.002.003h0a.5.5 0 0 1-.894 0Zm0 0h0s0 0 0 0h0Z"
+                ></path>
+                <path 
+                  stroke="#000" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  d="M16.543 3.75c-3.043 0-4.543 3-4.543 3s-1.5-3-4.543-3C4.984 3.75 3.025 5.82 3 8.288c-.052 5.125 4.065 8.77 8.578 11.832a.75.75 0 0 0 .844 0c4.512-3.063 8.63-6.707 8.578-11.832-.025-2.469-1.984-4.538-4.457-4.538Z"
+                ></path>
+              </svg>
+            </span>
+            
+            <!-- Product Details -->
+            <div class="px-2 pb-2">
+              <h2 
+                class="text-sm text-gray-800 mt-1 truncate" 
+                style="font-size: 13px; font-family: NewHeroTRIAL-Regular;"
+              >
+                {{ product.name }}
+              </h2>
+              <div class="flex gap-2 undefined">
+                <p 
+                  style="font-size: 13px; font-family: NewHeroTRIAL-Regular; color: inherit; font-weight: normal;"
+                >
+                  {{ product.price }}
+                </p>
+              </div>
+              
+              <!-- Color Options -->
+              @if (product.colors && product.colors.length > 0) {
+                <div class="flex flex-row items-center mt-1 ml-1">
+                  @for (colorOption of product.colors; track $index) {
+                    <div 
+                      class="w-2 h-2 mr-1 mb-[2px]" 
+                      [style.background-color]="colorOption.color"
+                    ></div>
+                  }
+                  @if (product.additionalColorsCount) {
+                    <span 
+                      class="ml-1 mb-[2px]" 
+                      style="font-family: NewHeroTRIAL-Light; font-size: 10px;"
+                    >
+                      +{{ product.additionalColorsCount }}
+                    </span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
