@@ -1,0 +1,12 @@
+// Custom gradient for transparent overlay
+.from-transparent-35 {
+  --tw-gradient-from: rgba(0, 0, 0, 0.35);
+  --tw-gradient-to: rgb(0 0 0 / 0);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+// Ensure images load smoothly
+img {
+  transition: opacity 0.3s ease-in-out;
+}
+

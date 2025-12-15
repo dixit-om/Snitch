@@ -1,0 +1,40 @@
+<div class="my-[28px] mx-0">
+  <h2 
+    class="text-center uppercase my-[16px]" 
+    style="font-family: NewHeroTRIAL-Bold; font-size: 16px;"
+  >
+    Featured Categories
+  </h2>
+  
+  <div class="grid grid-cols-3 mx-auto h-full max-w-lg gap-x-[6px] gap-y-[6px] md:gap-[5px] md:grid-cols-4 lg:grid-cols-6 md:max-w-full">
+    @for (category of featuredCategories; track category.id) {
+      <div class="relative">
+        <div 
+          class="relative border flex aspect-[3/4] mr-[6px] w-full overflow-hidden cursor-pointer" 
+          style="height: 320px;"
+          (click)="onCategoryClick(category)"
+        >
+          <img 
+            [alt]="'Image of ' + category.imageUrl" 
+            loading="lazy" 
+            decoding="async" 
+            [src]="category.imageUrl" 
+            style="position: absolute; height: 100%; width: 100%; inset: 0px; object-fit: cover; color: transparent;"
+          />
+          
+          @if (category.name) {
+            <div class="pointer-events-none absolute inset-0 z-10 h-full w-full flex justify-center bg-gradient-to-t from-transparent-35 items-end">
+              <p 
+                class="text-white py-3 text-center" 
+                style="font-family: NewHeroTRIAL-Bold; font-size: 14px;"
+              >
+                {{ category.name }}
+              </p>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
