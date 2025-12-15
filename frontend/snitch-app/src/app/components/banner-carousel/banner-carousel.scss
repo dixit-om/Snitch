@@ -1,0 +1,33 @@
+swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Ensure the swiper container takes up the full height
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Skeleton loading animation
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-pulse {
+  animation: shimmer 2s infinite linear;
+  background-size: 1000px 100%;
+}
+

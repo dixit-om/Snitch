@@ -1,0 +1,51 @@
+<div class="w-full h-full">
+  <swiper-container
+    init="false"
+    slides-per-view="1.2"
+    space-between="8"
+    centered-slides="true"
+    loop="true"
+    autoplay="true"
+    speed="5000"
+    class="h-full w-full"
+    #swiperContainer
+  >
+    @for (slide of bannerSlides; track slide.imageUrl) {
+      <swiper-slide class="h-full max-h-full min-h-0 w-full min-w-0 max-w-full">
+        <div
+          class="group relative isolate flex flex-col items-center justify-center overflow-hidden transition ease-in-out h-full w-full cursor-pointer"
+          (click)="onSlideClick(slide)"
+        >
+          <!-- Skeleton Loader -->
+          <div 
+            class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse"
+            [class.hidden]="imageLoadedStates[slide.imageUrl]"
+          ></div>
+
+          <!-- Top gradient overlay -->
+          <div class="absolute inset-x-0 top-0 h-[200px] bg-gradient-to-b from-transparent-35 z-10"></div>
+          
+          <!-- Bottom gradient overlay -->
+          <div class="absolute inset-x-0 bottom-0 h-[200px] bg-gradient-to-t from-transparent-35 z-10"></div>
+          
+          <!-- Image (540px × 750px) -->
+          <div class="h-full w-full relative">
+            <img
+              [src]="slide.imageUrl"
+              [alt]="slide.alt"
+              width="540"
+              height="750"
+              loading="lazy"
+              decoding="async"
+              (load)="onImageLoad(slide.imageUrl)"
+              [class.opacity-0]="!imageLoadedStates[slide.imageUrl]"
+              [class.opacity-100]="imageLoadedStates[slide.imageUrl]"
+              class="absolute h-full w-full inset-0 object-cover transition-opacity duration-300"
+            />
+          </div>
+        </div>
+      </swiper-slide>
+    }
+  </swiper-container>
+</div>
+
