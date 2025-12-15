@@ -1,0 +1,26 @@
+<div class="w-full md:max-w-full">
+  <h2 
+    class="text-center pb-1 py-4 uppercase my-[8px]" 
+    style="font-family: NewHeroTRIAL-Bold; font-size: 16px;"
+  >
+    SHOP YOUR SIZE
+  </h2>
+  
+  <div 
+    class="relative w-full h-[120px] mb-4 md:h-[180px] lg:h-[350px] xl:h-[400px] md:max-w-full md:mx-auto flex justify-center items-center cursor-pointer"
+    (click)="onBannerClick()"
+  >
+    <img 
+      alt="Cut Size Banner" 
+      fetchpriority="high" 
+      decoding="async" 
+      data-nimg="fill" 
+      class="object-cover" 
+      [src]="bannerImageUrl" 
+      style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
+    />
+  </div>
+  
+  <div class="cursor-pointer bg-white"></div>
+</div>
+
