@@ -14,6 +14,9 @@ export interface FeaturedCategory {
   styleUrl: './featured-categories.scss',
 })
 export class FeaturedCategoriesComponent {
+  // Track image loading states
+  imageLoadedStates: { [key: string]: boolean } = {};
+  
   featuredCategories: FeaturedCategory[] = [
     {
       id: '1',
@@ -80,6 +83,10 @@ export class FeaturedCategoriesComponent {
   onCategoryClick(category: FeaturedCategory): void {
     console.log('Category clicked:', category);
     // TODO: Navigate to category page
+  }
+
+  onImageLoad(imageUrl: string): void {
+    this.imageLoadedStates[imageUrl] = true;
   }
 }
 

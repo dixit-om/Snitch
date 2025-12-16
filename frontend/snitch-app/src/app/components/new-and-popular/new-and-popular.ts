@@ -25,6 +25,9 @@ interface Product {
 })
 export class NewAndPopularComponent {
   selectedFilter: string = 'all';
+  
+  // Track image loading states
+  imageLoadedStates: { [key: string]: boolean } = {};
 
   filterChips: FilterChip[] = [
     { id: 'all', label: 'All' },
@@ -197,6 +200,10 @@ export class NewAndPopularComponent {
     event.stopPropagation(); // Prevent product click
     console.log('Wishlist clicked:', product);
     // Implement wishlist logic here
+  }
+
+  onImageLoad(imageUrl: string): void {
+    this.imageLoadedStates[imageUrl] = true;
   }
 }
 

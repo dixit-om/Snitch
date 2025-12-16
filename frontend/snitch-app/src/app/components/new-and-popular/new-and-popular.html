@@ -45,12 +45,22 @@
                 style="height: 390px; pointer-events: auto; cursor: pointer;"
               >
                 <div class="h-full w-full relative">
+                  <!-- Skeleton Loader -->
+                  <div 
+                    class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse"
+                    [class.hidden]="imageLoadedStates[product.imageUrl]"
+                  ></div>
+                  
                   <img 
                     [alt]="product.name" 
                     loading="lazy" 
                     decoding="async" 
                     data-nimg="fill" 
                     [src]="product.imageUrl" 
+                    (load)="onImageLoad(product.imageUrl)"
+                    [class.opacity-0]="!imageLoadedStates[product.imageUrl]"
+                    [class.opacity-100]="imageLoadedStates[product.imageUrl]"
+                    class="transition-opacity duration-300"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; object-fit: cover; color: transparent;"
                   />
                 </div>
