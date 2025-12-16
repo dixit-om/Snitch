@@ -1,0 +1,18 @@
+// Footer specific styles (if needed beyond Tailwind)
+// Using SCSS allows for future custom styling
+
+footer {
+  // Smooth scroll behavior for anchor links
+  a {
+    scroll-behavior: smooth;
+  }
+
+  // Custom hover effects for links
+  .social-link {
+    &:hover {
+      transform: translateY(-2px);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}
+
