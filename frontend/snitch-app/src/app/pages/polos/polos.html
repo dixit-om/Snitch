@@ -1,0 +1,44 @@
+<div class="w-full bg-white min-h-screen">
+  <div class="sticky md:pb-2 top-[60px] z-10 md:z-1 transition-all duration-300 ease-in-out opacity-100 pointer-events-auto bg-white translate-y-0">
+    <div class="hidden md:block">
+      <div class="max-w-[1920px] mx-auto px-4">
+        <ul class="flex items-center space-x-1 py-2">
+          <li class="hover:underline text-[10px] font-light"><a routerLink="/">Home</a></li>
+          <span><svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path stroke="#000" stroke-linecap="round" d="m11 4.8 5 5-5 5"></path></svg></span>
+          <li class="text-[10px] font-light"><span>Men-Polos</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hidden md:flex justify-between items-center md:mb-6 md:mt-2 max-w-[1920px] mx-auto px-4">
+      <span class="font-bold text-2xl w-fit">POLOS</span>
+      <div class="relative w-64">
+        <button (click)="toggleSort()" class="flex items-center justify-between w-full border px-4 py-2 bg-white text-[12px] font-normal"><span>Sort</span><span><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.49995 9.33708L3.12495 4.96208L2.46204 5.62499L7.49995 10.6629L12.5379 5.62499L11.8749 4.96208L7.49995 9.33708Z" fill="#000"></path></svg></span></button>
+        @if (isSortOpen) {
+          <div class="absolute top-full left-0 w-full bg-white border border-t-0 shadow-lg z-20"><div class="py-2"><button class="w-full text-left px-4 py-2 hover:bg-gray-100 text-[12px]">Price: Low to High</button><button class="w-full text-left px-4 py-2 hover:bg-gray-100 text-[12px]">Price: High to Low</button><button class="w-full text-left px-4 py-2 hover:bg-gray-100 text-[12px]">Newest First</button><button class="w-full text-left px-4 py-2 hover:bg-gray-100 text-[12px]">Popularity</button></div></div>
+        }
+      </div>
+    </div>
+    <div class="flex max-w-[480px] md:max-w-full overflow-x-auto no-scrollbar ml-[16px] my-[16px] md:mx-auto md:flex-nowrap md:overflow-x-auto md:overflow-y-hidden">
+      @for (category of categories; track category) {
+        <div (click)="selectCategory(category)" [class.bg-black]="selectedCategory === category" [class.bg-white]="selectedCategory !== category" class="border border-black mr-[10px] cursor-pointer"><p [class.text-white]="selectedCategory === category" [class.text-black]="selectedCategory !== category" class="text-center align-middle px-[12px] py-[3px] m-auto truncate uppercase text-[12px] font-light">{{ category }}</p></div>
+      }
+    </div>
+    <div class="bg-white z-10 md:hidden">
+      <div class="flex items-center justify-between p-4 md:p-0 md:justify-end">
+        <div class="flex space-x-2">
+          <button (click)="setGridView('2x1')" aria-label="2x1 Grid View"><svg width="24" height="24" fill="none"><path [attr.stroke]="gridView === '2x1' ? '#000' : '#DADADA'" d="M.5.669h17V17.58H.5zM9.5 1v10.526M0 11.026h18"></path></svg></button>
+          <button (click)="setGridView('1x1')" aria-label="1x1 Grid View"><svg width="24" height="24" fill="none"><path [attr.stroke]="gridView === '1x1' ? '#000' : '#DADADA'" d="M.5.669h17V17.58H.5zM0 9.974h17.053"></path></svg></button>
+          <button (click)="setGridView('3x3')" aria-label="3x3 Grid View"><svg width="24" height="24" fill="none"><path [attr.stroke]="gridView === '3x3' ? '#000' : '#DADADA'" d="M.5.669h17V17.58H.5zM0 7.131h17.053M0 12.815h17.053M6.186 1.947v16.105M11.867 1.947v16.105"></path></svg></button>
+        </div>
+        <button (click)="toggleFilter()" aria-label="Open filters" class="md:hidden"><svg width="23" height="23" fill="none"><path stroke="#000" stroke-linecap="round" stroke-width="1.063" d="M4.063 11.5V3m14.875 17v-3.188M4.063 20v-4.25m14.875-3.188V3M11.5 6.188V3m0 17v-9.563M4.063 15.75a2.125 2.125 0 1 0 0-4.25 2.125 2.125 0 0 0 0 4.25ZM11.5 10.438a2.125 2.125 0 1 0 0-4.25 2.125 2.125 0 0 0 0 4.25ZM18.938 16.813a2.125 2.125 0 1 0 0-4.25 2.125 2.125 0 0 0 0 4.25Z"></path></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1920px] mx-auto px-4">
+    <div [class.grid-cols-2]="gridView === '2x1'" [class.grid-cols-1]="gridView === '1x1'" [class.grid-cols-3]="gridView === '3x3'" [class.md:grid-cols-5]="gridView === '2x1' || gridView === '3x3'" class="grid gap-x-2 gap-y-6 w-full">
+      @for (product of products; track product.id) {
+        <div class="relative"><a href="#"><div class="relative w-full overflow-hidden h-[360px] pointer-events-auto cursor-pointer"><div class="h-full w-full relative"><img [alt]="product.name" loading="lazy" decoding="async" [src]="product.image" class="absolute h-full w-full inset-0 object-cover"/></div></div></a><span class="absolute top-0 right-0 p-2 cursor-pointer hover:bg-[rgba(0,0,0,0.05)]"><svg width="24" height="24" fill="none"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="M11.553 6.974s0 0 0 0h0l-.002-.003-.01-.02a5.342 5.342 0 0 0-.239-.392 6.283 6.283 0 0 0-.785-.954c-.7-.695-1.716-1.355-3.06-1.355-2.18 0-3.934 1.83-3.957 4.043-.049 4.833 3.833 8.342 8.359 11.413h0a.25.25 0 0 0 .282 0h0c4.525-3.071 8.407-6.58 8.359-11.413-.023-2.214-1.776-4.043-3.957-4.043-1.344 0-2.36.66-3.06 1.355a6.283 6.283 0 0 0-.979 1.264l-.045.083-.01.019-.002.003h0a.5.5 0 0 1-.894 0Zm0 0h0s0 0 0 0h0Z"></path><path stroke="#000" stroke-linecap="round" stroke-linejoin="round" d="M16.543 3.75c-3.043 0-4.543 3-4.543 3s-1.5-3-4.543-3C4.984 3.75 3.025 5.82 3 8.288c-.052 5.125 4.065 8.77 8.578 11.832a.75.75 0 0 0 .844 0c4.512-3.063 8.63-6.707 8.578-11.832-.025-2.469-1.984-4.538-4.457-4.538Z"></path></svg></span><div class="px-2 pb-2"><h2 class="text-sm text-gray-800 mt-1 truncate text-[13px] font-normal">{{ product.name }}</h2><div class="flex gap-2"><p class="text-[13px] font-normal">₹{{ product.price }}</p></div>@if (product.colors.length > 0) {<div class="flex flex-row items-center mt-1 ml-1">@for (color of product.colors; track color) {<div class="w-2 h-2 mr-1 mb-[2px]" [style.background-color]="color"></div>}@if (product.moreColors) {<span class="ml-1 mb-[2px] text-[10px] font-light">+{{ product.moreColors }}</span>}</div>}</div></div>
+      }
+    </div>
+  </div>
+</div>
