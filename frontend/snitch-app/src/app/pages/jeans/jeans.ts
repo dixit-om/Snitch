@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-jeans',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, Footer],
   templateUrl: './jeans.html',
   styleUrl: './jeans.scss',
 })
