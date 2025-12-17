@@ -90,7 +90,7 @@
     
     <!-- Sidebar -->
     <div 
-      class="absolute left-0 top-0 h-full w-80 bg-white shadow-xl transform transition-transform duration-300"
+      class="absolute left-0 top-0 h-full w-[90vw] max-w-md bg-white shadow-xl transform transition-transform duration-300"
       [class.-translate-x-full]="!isMobileMenuOpen"
       [class.translate-x-0]="isMobileMenuOpen"
       (click)="$event.stopPropagation()">
@@ -107,36 +107,64 @@
         </button>
       </div>
       
-      <nav class="p-4">
-        <ul class="space-y-4">
-          <li>
-            <a routerLink="/new-arrivals" (click)="toggleMobileMenu()" class="block py-2 text-lg hover:text-gray-600 transition-colors">
-              New Arrivals
-            </a>
-          </li>
-          <li>
-            <a routerLink="/shirts" (click)="toggleMobileMenu()" class="block py-2 text-lg hover:text-gray-600 transition-colors">
-              Shirts
-            </a>
-          </li>
-          <li>
-            <a routerLink="/trousers" (click)="toggleMobileMenu()" class="block py-2 text-lg hover:text-gray-600 transition-colors">
-              Trousers
-            </a>
-          </li>
-          <li>
-            <a routerLink="/jeans" (click)="toggleMobileMenu()" class="block py-2 text-lg hover:text-gray-600 transition-colors">
-              Jeans
-            </a>
-          </li>
-          <li>
-            <a routerLink="/polos" (click)="toggleMobileMenu()" class="block py-2 text-lg hover:text-gray-600 transition-colors">
-              Polos
-            </a>
-          </li>
-          <li><a href="#" class="block py-2 text-lg hover:text-gray-600 transition-colors">Winterwear</a></li>
-          <li><a href="#" class="block py-2 text-lg hover:text-gray-600 transition-colors">Footwear</a></li>
-          <li><a href="#" class="block py-2 text-lg hover:text-gray-600 transition-colors">Essentials</a></li>
+      <nav class="p-4 overflow-y-auto h-[calc(100vh-80px)]">
+        <ul class="space-y-2">
+          @for (category of menuCategories; track category.name) {
+            <li class="border-b border-gray-100">
+              <!-- Category Header -->
+              <div 
+                (click)="toggleCategory(category.name)"
+                class="flex items-center justify-between py-3 cursor-pointer hover:bg-gray-50 px-2 rounded-md transition-colors">
+                <span class="text-lg font-medium">{{ category.name }}</span>
+                <svg 
+                  class="w-5 h-5 transition-transform duration-200"
+                  [class.rotate-180]="isExpanded(category.name)"
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+              
+              <!-- Expandable Product Grid -->
+              <div 
+                class="overflow-hidden transition-all duration-300 ease-in-out"
+                [class.max-h-0]="!isExpanded(category.name)"
+                [class.max-h-[600px]]="isExpanded(category.name)">
+                <div class="grid grid-cols-2 gap-3 p-2 pb-4">
+                  @for (product of category.products; track product.name) {
+                    <a 
+                      [routerLink]="category.route" 
+                      (click)="toggleMobileMenu()"
+                      class="group cursor-pointer">
+                      <div class="relative overflow-hidden rounded-lg bg-gray-100 aspect-[3/4]">
+                        <img 
+                          [src]="product.image" 
+                          [alt]="product.name"
+                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <p class="mt-2 text-xs text-gray-700 text-center truncate">{{ product.name }}</p>
+                    </a>
+                  }
+                </div>
+                <!-- View All Button -->
+                <div class="px-2 pb-3">
+                  <a 
+                    [routerLink]="category.route" 
+                    (click)="toggleMobileMenu()"
+                    class="block w-full py-2 text-center bg-black text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium">
+                    View All {{ category.name }}
+                  </a>
+                </div>
+              </div>
+            </li>
+          }
+          
+          <!-- Other Categories -->
+          <li><a href="#" class="block py-3 px-2 text-lg hover:bg-gray-50 rounded-md transition-colors">Winterwear</a></li>
+          <li><a href="#" class="block py-3 px-2 text-lg hover:bg-gray-50 rounded-md transition-colors">Footwear</a></li>
+          <li><a href="#" class="block py-3 px-2 text-lg hover:bg-gray-50 rounded-md transition-colors">Essentials</a></li>
         </ul>
       </nav>
     </div>
